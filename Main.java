@@ -124,21 +124,24 @@ class jogoPrincipal {
 	public static int quantidadeDeMadeira = 0;
 	public static int nivelDaFogueira = 100;
 	public static int vidaDoJogador = 100;
+	public static int valorAleatorio = Main.random.nextInt(100) + 1;
 	// Construtor
 	public jogoPrincipal() {
 		// 	Boolean
 		boolean jogoRodando = true;
 		boolean entradaValida = false;
 		while (jogoRodando) {
+			// Reduz algumas estatisticas
+			vidaDoJogador -= 5;
+			nivelDaFogueira -= 10;
+			// Muda entradaValida para false
+			entradaValida = false;
+			// Mostra os status atuais
 			mostrarStatus();
-			Main.print(2, "");
-			Main.print(1, "Escolha uma ação abaixo");
-			Main.entradaDoUsuarioString = Main.scanner.nextLine().trim();
-			// Parei daqui
-			// Pega a entrada do usuário
+			// Exibi as escolhas do usuário
+			exibirOpcoes();
+			// Loop de verificação de entrada válida
 			while (!entradaValida) {
-				// Exibi o menu de boas-vindas
-				exibirOpcoes();
 				// Pede ao usuário uma entrada
 				Main.print(2, "");
 				Main.print(1, "Digite uma opção válida e aperte enter:");
@@ -148,9 +151,33 @@ class jogoPrincipal {
 				try {
 					// Tenta colocar a String em um int (Conversão)
 					Main.entradaDoUsuarioInt = Integer.parseInt(Main.entradaDoUsuarioString);
-					// Se conseguiu, verifica a opção escolhida
-					// Parei aqui, na parte da criação do IF
-					entradaValida = true;
+					// Verifica se a opção é válida
+					if (Main.entradaDoUsuarioInt >= 1 && Main.entradaDoUsuarioInt <= 3) {
+						// Torna a entrada válida para sair do loop
+						entradaValida = true;
+						// Se é válida, verifica a opção escolhida
+						switch (Main.entradaDoUsuarioInt) {
+							// Caso 1, coleta madeira
+							case 1:
+								coletarMadeira();
+								break;
+							// Caso 2, alimenta a fogueira
+							case 2:
+								alimentarFogueira();
+								break;
+							// Caso 3, recupera vida
+							case 3:
+								recuperarVida();
+								break;
+							// Caso padrão
+							default:
+								Main.print(2, "");
+								Main.print(3, "Você não digitou uma entrada válida");
+								break;
+						}
+					} else {
+						throw new IllegalArgumentException("Você tem que digitar uma opção válida");
+					}
 				// Trata dos erros
 				} catch (NumberFormatException e) {
 					// Erro NumberFormatException tratado
@@ -164,7 +191,6 @@ class jogoPrincipal {
 					Main.print(1, "");
 				}
 			}
-			// Até aqui
 		}
 	}
 	// Método para mostrar as estatisticas
@@ -176,8 +202,53 @@ class jogoPrincipal {
 		Main.print(2, "");
 		Main.print(1, "Esses são seus status atuais");
 	}
-	// Método para exebir opções
+	// Método para exibir opções
 	public static void exibirOpcoes() {
-		
+		Main.print(2, "");
+		Main.print(5, "1 - Coletar madeira");
+		Main.print(5, "2 - Alimentar fogueira");
+		Main.print(5, "3 - Recuperar vida");
+	}
+	// Método para adicionar madeira
+	public static void coletarMadeira() {
+		valorAleatorio = Main.random.nextInt(3);
+		quantidadeDeMadeira =+ valorAleatorio;
+	}
+	// Método para aumentar o nivel do fogo
+	public static void alimentarFogueira() {
+		if (quantidadeDeMadeira >= 1) {
+			nivelDaFogueira += 15;
+			quantidadeDeMadeira -= 1;
+		} else {
+			Main.print(2, "");
+			Main.print(3, "Você não tem madeira suficiente!");
+		}
+	}
+	// Método para recuperar vida
+	public static void recuperarVida() {
+		valorAleatorio = Main.random.nextInt(100) + 1;
+		if (valorAleatorio > vidaDoJogador) {
+			Main.print(2, "");
+			Main.print(1, "Sua vida está em 100");
+			vidaDoJogador = 100;
+		} else {
+			vidaDoJogador += valorAleatorio;
+			Main.print(2, "");
+			System.out.println("Você recuperou " + valorAleatorio + " de vida");
+		}
+	}
+	// Método para verificar se o player está vivo
+	public static void verificarSobrevivencia() {
+		valorAleatorio = Main.random.nextInt(3);
+		if (vidaDoJogador <= 0) {
+			Main.print(2, "");
+			Main.print(3, "Fim de jogo! Você morreu por falta de saúde 💔💔💔");
+		} else if (nivelDaFogueira <= 0) {
+			Main.print(2, "");
+			Main.print(3, "Fim de jogo! Você morreu de frio 🥶🥶🥶");
+		} else if (valorAleatorio == 1) {
+			Main.print(2, "");
+			Main.print(5, "Você foi resgatado!");
+		}
 	}
 }
