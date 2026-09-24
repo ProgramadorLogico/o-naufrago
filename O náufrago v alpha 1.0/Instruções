@@ -1,0 +1,19 @@
+Aviso inicial: Este executável só roda no Linux, então garanta que você usa Linux
+
+1 - Abra a pasta do projeto
+2 - Procure pelo executável
+3 - Clique com o botão direito no executável
+4 - Pesquise por propriedades
+5 - Marque a caixa de executar como programa caso não esteja
+6 - Feche a janela
+7 - Abra seu terminal
+8 - Mantenha a janela do gerenciador de arquivos e a do 
+terminal uma ao lado da outro
+9 - Arraste e solte o arquivo para o terminal
+10 - No terminal aperte enter e o programa rodará
+
+Novas versões em breve!
+
+Registro de versões:
+
+V: alpha-1.0 - Base do jogo, ou seja, o código principal
