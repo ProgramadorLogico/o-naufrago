@@ -190,6 +190,9 @@ class jogoPrincipal {
 
 			// Verifica se o player está vivo
 			verificarSobrevivencia();
+			
+			// Verifica se o player foi resgatado
+			verificarResgate();
 
 			if (playerVivo) {
 				// Loop de verificação de entrada válida
@@ -388,7 +391,7 @@ class jogoPrincipal {
 		valorAleatorio = random.nextInt(20) + 1;
 		
 		// Verifica se o player venceu
-		if (valorAleatorio == 0) {
+		if (valorAleatorio == 1) {
 			Main.print(2, "");
 			Main.print(4, "Você foi resgatado!");
 			jogoRodando = false;
