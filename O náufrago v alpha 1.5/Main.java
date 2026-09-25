@@ -159,11 +159,16 @@ class jogoPrincipal {
 	public static int nivelDaFogueira = 100;
 	public static int vidaDoJogador = 100;
 	public static int valorAleatorio = Main.random.nextInt(100) + 1;
-	public static String nomeDoJogador = null;
 	
 	// Boolean
 	public static boolean jogoRodando = true;
 	public static boolean playerVivo = true;
+	
+	// String
+	public static String nomeDoJogador = null;
+	
+	// Imports
+	public static Random random = new Random();
 	
 	// Construtor
 	public jogoPrincipal() {
@@ -178,8 +183,7 @@ class jogoPrincipal {
 		while (jogoRodando) {
 		
 			// Reduz algumas estatisticas
-			vidaDoJogador -= 5;
-			nivelDaFogueira -= 10;
+			estatisticasAtualizar();
 			
 			// Muda entradaValida para false
 			entradaValida = false;
@@ -285,25 +289,32 @@ class jogoPrincipal {
 	
 	// Método para adicionar madeira
 	public static void coletarMadeira() {
-		valorAleatorio = Main.random.nextInt(3) + 1;
+		valorAleatorio = Main.random.nextInt(4);
 		quantidadeDeMadeira += valorAleatorio;
 	}
 	
 	// Método para aumentar o nivel do fogo
 	public static void alimentarFogueira() {
-		if (quantidadeDeMadeira >= 1) {
-			nivelDaFogueira += 15;
-			quantidadeDeMadeira -= 1;
+		
+		// Verifica se a fogueira é maior ou igual a 100
+		if (nivelDaFogueira < 90) {
+			if (quantidadeDeMadeira >= 1) {
+				nivelDaFogueira += 10;
+				quantidadeDeMadeira -= 1;
+			} else {
+				Main.print(2, "");
+				Main.print(3, "Você não tem madeira suficiente!");
+			}
 		} else {
 			Main.print(2, "");
-			Main.print(3, "Você não tem madeira suficiente!");
+			Main.print(3, "A fogueira está muito grande para alimentar");
 		}
 	}
 	
 	// Método para recuperar vida
 	public static void recuperarVida() {
-		valorAleatorio = Main.random.nextInt(100) + 1;
-		if (valorAleatorio > vidaDoJogador) {
+		valorAleatorio = Main.random.nextInt(50);
+		if (valorAleatorio + vidaDoJogador >= 100) {
 			Main.print(2, "");
 			Main.print(1, "Sua vida está em 100");
 			vidaDoJogador = 100;
@@ -316,7 +327,6 @@ class jogoPrincipal {
 	
 	// Método para verificar se o player está vivo
 	public static void verificarSobrevivencia() {
-		valorAleatorio = Main.random.nextInt(10);
 		if (vidaDoJogador <= 0) {
 			Main.print(2, "");
 			Main.print(3, "Fim de jogo! Você morreu por falta de saúde");
@@ -326,12 +336,6 @@ class jogoPrincipal {
 		} else if (nivelDaFogueira <= 0) {
 			Main.print(2, "");
 			Main.print(3, "Fim de jogo! Você morreu de frio");
-			jogoRodando = false;
-			Main.entradaValida = true;
-			playerVivo = false;
-		} else if (valorAleatorio == 1) {
-			Main.print(2, "");
-			Main.print(4, "Você foi resgatado!");
 			jogoRodando = false;
 			Main.entradaValida = true;
 			playerVivo = false;
@@ -366,6 +370,30 @@ class jogoPrincipal {
 				Main.print(2, "");
 				Main.print(3, "Você não digitou um nome válido!");
 			}
+		}
+	}
+	
+	// Método de cria as estatisticas aleatórias
+	public static void estatisticasAtualizar() {
+		
+		// Diminui os valores de forma aleatória
+		vidaDoJogador -= random.nextInt(10);
+		nivelDaFogueira -= random.nextInt(10);
+	}
+	
+	// Método para verificar se o player foi resgatado
+	public static void verificarResgate() {
+		
+		// Atualiza o valor aleatório
+		valorAleatorio = random.nextInt(20) + 1;
+		
+		// Verifica se o player venceu
+		if (valorAleatorio == 0) {
+			Main.print(2, "");
+			Main.print(4, "Você foi resgatado!");
+			jogoRodando = false;
+			Main.entradaValida = true;
+			playerVivo = false;
 		}
 	}
 }
