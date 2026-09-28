@@ -393,7 +393,7 @@ class jogoPrincipal {
 		// Verifica se o player venceu
 		if (valorAleatorio == 1) {
 			Main.print(2, "");
-			Main.print(4, "Você foi resgatado!");
+			System.out.println(nomeDoJogador + " foi resgatado(A)");
 			jogoRodando = false;
 			Main.entradaValida = true;
 			playerVivo = false;
