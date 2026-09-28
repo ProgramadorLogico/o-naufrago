@@ -324,7 +324,7 @@ class jogoPrincipal {
 		} else {
 			vidaDoJogador += valorAleatorio;
 			Main.print(2, "");
-			System.out.println("Você recuperou " + valorAleatorio + " de vida");
+			System.out.println(nomeDoJogador + " recuperou " + valorAleatorio);
 		}
 	}
 	
@@ -332,19 +332,19 @@ class jogoPrincipal {
 	public static void verificarSobrevivencia() {
 		if (vidaDoJogador <= 0) {
 			Main.print(2, "");
-			Main.print(3, "Fim de jogo! Você morreu por falta de saúde");
+			System.out.println(nomeDoJogador + " morreu por falta de saúde");
 			jogoRodando = false;
 			Main.entradaValida = true;
 			playerVivo = false;
 		} else if (nivelDaFogueira <= 0) {
 			Main.print(2, "");
-			Main.print(3, "Fim de jogo! Você morreu de frio");
+			System.out.println(nomeDoJogador + " morreu de frio");
 			jogoRodando = false;
 			Main.entradaValida = true;
 			playerVivo = false;
 		} else {
 			Main.print(2, "");
-			Main.print(5, "Nada aconteceu, você ainda está preso");
+			System.out.println(nomeDoJogador + " está bem, nada aconteceu");
 		}
 	}
 	
