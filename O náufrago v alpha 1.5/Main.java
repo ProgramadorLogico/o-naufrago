@@ -206,7 +206,7 @@ class jogoPrincipal {
 					
 					// Pede ao usuário uma entrada
 					Main.print(2, "");
-					Main.print(1, "Digite uma opção válida e aperte enter:");
+					Main.print(1, "Digite uma opção e aperte enter:");
 					
 					// Pega a entrada em uma String
 					Main.entradaDoUsuarioString = Main.scanner.nextLine().trim();
@@ -279,7 +279,7 @@ class jogoPrincipal {
 		System.out.println("Vida do player: " + vidaDoJogador);
 		System.out.println("Quantidade de madeira: " + quantidadeDeMadeira + Main.resetarCorDoTextoParaPadrao);
 		Main.print(1, "");
-		Main.print(1, "Esses são seus status atuais");
+		System.out.println(Main.corDoTextoNegrito + "Esses são os status de " + nomeDoJogador + Main.resetarCorDoTextoParaPadrao);
 	}
 	
 	// Método para exibir opções
@@ -306,11 +306,11 @@ class jogoPrincipal {
 				quantidadeDeMadeira -= 1;
 			} else {
 				Main.print(2, "");
-				Main.print(3, "Você não tem madeira suficiente!");
+				System.out.println(Main.corDoTextoVermelho + nomeDoJogador + " não tem madeira suficiente" + Main.resetarCorDoTextoParaPadrao);
 			}
 		} else {
 			Main.print(2, "");
-			Main.print(3, "A fogueira está muito grande para alimentar");
+			Main.print(3, "A fogueira está muito grande para alimenta-lá!");
 		}
 	}
 	
@@ -319,12 +319,12 @@ class jogoPrincipal {
 		valorAleatorio = Main.random.nextInt(50);
 		if (valorAleatorio + vidaDoJogador >= 100) {
 			Main.print(2, "");
-			Main.print(1, "Sua vida está em 100");
+			System.out.println(Main.corDoTextoVerde + "A vida de " + nomeDoJogador + " está em 100" + Main.resetarCorDoTextoParaPadrao);
 			vidaDoJogador = 100;
 		} else {
 			vidaDoJogador += valorAleatorio;
 			Main.print(2, "");
-			System.out.println(nomeDoJogador + " recuperou " + valorAleatorio);
+			System.out.println(Main.corDoTextoVerde + nomeDoJogador + " recuperou " + valorAleatorio + " de vida" + Main.resetarCorDoTextoParaPadrao);
 		}
 	}
 	
@@ -332,19 +332,19 @@ class jogoPrincipal {
 	public static void verificarSobrevivencia() {
 		if (vidaDoJogador <= 0) {
 			Main.print(2, "");
-			System.out.println(nomeDoJogador + " morreu por falta de saúde");
+			System.out.println(Main.corDoTextoVermelho + nomeDoJogador + " morreu por falta de saúde" + Main.resetarCorDoTextoParaPadrao);
 			jogoRodando = false;
 			Main.entradaValida = true;
 			playerVivo = false;
 		} else if (nivelDaFogueira <= 0) {
 			Main.print(2, "");
-			System.out.println(nomeDoJogador + " morreu de frio");
+			System.out.println(Main.corDoTextoVermelho + nomeDoJogador + " morreu de frio" + Main.resetarCorDoTextoParaPadrao);
 			jogoRodando = false;
 			Main.entradaValida = true;
 			playerVivo = false;
 		} else {
 			Main.print(2, "");
-			System.out.println(nomeDoJogador + " está bem, nada aconteceu");
+			System.out.println(Main.corDoTextoNegrito + nomeDoJogador + " está bem, nada aconteceu" + Main.resetarCorDoTextoParaPadrao);
 		}
 	}
 	
@@ -388,12 +388,12 @@ class jogoPrincipal {
 	public static void verificarResgate() {
 		
 		// Atualiza o valor aleatório
-		valorAleatorio = random.nextInt(20) + 1;
+		valorAleatorio = random.nextInt(999999999) + 1;
 		
 		// Verifica se o player venceu
 		if (valorAleatorio == 1) {
 			Main.print(2, "");
-			System.out.println(nomeDoJogador + " foi resgatado(A)");
+			System.out.println(Main.corDoTextoVerde + nomeDoJogador + " foi resgatado(A)" + Main.resetarCorDoTextoParaPadrao);
 			jogoRodando = false;
 			Main.entradaValida = true;
 			playerVivo = false;
