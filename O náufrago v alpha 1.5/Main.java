@@ -115,7 +115,9 @@ public class Main {
 			// Exibi as opções e dá as boas vindas
 			System.out.print(corDoTextoNegrito);
 			print(5, "***********************************");
-			print(5, "BEM-VINDO A O NÁUFRAGO V: Alpha 1.0");
+			print(1, "");
+			print(5, "BEM-VINDO A O NÁUFRAGO V: Alpha 1.5");
+			print(1, "");
 			print(5, "***********************************");
 			System.out.println(resetarCorDoTextoParaPadrao);
 			print(1, "1 - Jogar");
